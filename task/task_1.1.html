@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>String</title>
+</head>
+<body>
+	<script>
+		//Дано масив рядків:
+		let stringArray = [
+			'Good afternoon. Today is May 3, 2023.',
+			'The weather is sunny, +26 degrees!',
+			'Skoda Fabia car, 2017.',
+			'The total area of ​​the territory of Ukraine is 603,628 km².',
+			'The length of the circle of the earth\'s meridian is 40,009 km, the length of the equator is 40,076 km.',
+			'My name is Pavlo',
+			'qwrt psdfg hjklz xcvbnm'
+		]
+		//у яких є цифри
+		stringArray.forEach(elem=> {
+			if(/[0-9]/.test(elem)) console.log(`Рядок у якого є цифри: ${elem}`)
+			//у яких немає цифр.
+			else console.log(`Рядок у якого немає цифри: ${elem}`)
+		})
+		//у яких є голосні літери
+		stringArray.forEach(elem =>{
+			if(/[aeiouy]/ig.test(elem)) console.log(`Рядок у якого є голосні літери: ${elem}`)
+			//у яких немає голосних літер
+			else console.log(`Рядок у якого є немає голосних літер: ${elem}`)
+		})
+		//у яких є або цифра 1 або цифра 3
+		stringArray.forEach(elem => {
+			if(/[1|3]/g.test(elem)) console.log(`Рядок у якого є цифра 1 або 3: ${elem}`)
+		})
+		//Дано рядок тексту:
+		let str = 'Hello! My name is Pavlo. I am 29 years old. I have beautiful wife.She is 25 years old. We had wedding on 24.09.2017'
+		//вивести усі числа, які є у тексті
+		let digits = str.match(/\d/g)
+		document.write(`<p>Усі числа, які є у тексті: <span>${digits}</span>.</p>`)
+		//Знайти усі знаки пунктуації, які були використано.
+		let signs = str.match(/\W\s/g)
+		document.write(`<p>Усі знаки пунктуації, які є у тексті: <span>${signs}</span>.</p>`)
+		//Вивести усі складові, які розділені розділовими знаками.
+		let wordsWithSigns = str.match(/\w*\W\s\w*/g)
+		document.write(`<p>Усі складові, які розділені розділовими знаками: <span>${wordsWithSigns}</span>.</p>`)
+		//Перевірити, чи містить він дату у форматі dd.mm.yyyy 
+		if(/\D\d{1,2}.\d{1,2}.\d{4}/g.test(str)) document.write(`<p>Рядок містить дату.</p>`)
+		else document.write(`<p>Рядок не містить дату.</p>`)
+		//Підрахувати кількість двоцифрових чисел у рядку
+		let countTwoDigit = str.match(/\b\d{2}\b/g)
+		document.write(`<p>Кількість двоцифрових чисел у рядку: <span>${countTwoDigit.length}</span>.</p>`)
+		//
+		//Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+		let strBank = '4142-3433-2323-3434 4142-3433-2323-3432 4142-3433-2323-3433'
+		if(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/.test(strBank)) {
+			console.log('Рядок може бути текстом номеру банківської картки')
+			document.write(strBank.match(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g))
+		}
+		else console.log('Рядок не може бути текстом номеру банківської картки')
+		//Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+		let governmentWeb = 'https://www.kmu.gov.ua/'
+		if(/[gov]/g.test(governmentWeb)) console.log('Сайт є урядовим')
+		else console.log('Сайт не є урядовим')
+		//Вибрати усі роки після 2021 року з отриманого повідомлення
+		let strWithYears = '1993 1994 1995 2000 2001 2003 2021 2022 2023 2024 2025 2026'
+		if(/20[2-9][2-9]/.test(strWithYears)) console.log(strWithYears.match(/20[2-9][2-9]/g))
+		//Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+		let phoneNumber = '+380990735622'
+		if(/\+38/.test(phoneNumber)) console.log('Телефоном з України')
+		else console.log('Телефоном не з України')
+		//Користувач вводить прізвище та ім’я в одному рядку через пробіл.Замінити пробіл на дефіс.
+		let userName = 'Pavlo Palahniuk'
+		let pt = /(\w+)\s(\w+)/
+		console.log(userName.replace(pt,'$2-$1'))
+		//Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+		let dateString = '04.05.2023'
+		dateString = dateString.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$2/$1/$3')
+		console.log(dateString)
+		//Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи  є це день вихідним
+		let userDay = prompt("Введіть номер дня (0-6) або назву дня тижня (sun,mon,tue,wed,thu,fri,sat)")
+		let regex = /sun|mon|tue|wed|thu|fri|sat/i
+		if (regex.test(userDay)) {
+			switch (userDay.toLowerCase()) {
+				case "sun":	userDay = 0
+					break;
+				case "mon":
+					userDay = 1
+					break;
+				case "tue":
+					userDay = 2
+					break;
+				case "wed":
+					userDay = 3
+					break;
+				case "thu":
+					userDay = 4
+					break;
+				case "fri":
+					userDay = 5
+					break;
+				case "sat":
+					userDay = 6
+					console.log(userDay)
+					break;
+				}
+			}
+			switch(parseInt(userDay)){
+				case 0 :
+				case 6 : document.write(`<p>Цей день є <span>вихідним</span>.</p>`)
+				break;
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5: document.write(`<p>Цей день є <span>робочим</span>.</p>`)
+				break;
+			}
+	</script> 
+</body>
+</html>

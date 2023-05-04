@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Task 2</title>
+</head>
+<body>
+	<div class="container"></div>
+	<script>
+		//Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+		let year = parseInt(prompt('Рік виробництва'))
+		let month = parseInt(prompt('Місяць виробництва'))
+		let day = parseInt(prompt('День виробництва'))
+		let expirationDate = parseInt(prompt('Введіть термін придатності'))
+		//
+		function getDiffDate(year,month,day){
+			let productDate = new Date(year,month-1,day)
+			let currentDate = new Date()
+			let diff = currentDate - productDate
+			return Math.floor(diff/(1000*60*60*24))
+		}
+		console.log(getDiffDate(year,month,day))
+		console.log(expirationDate)
+		function checkExpirationDate(expiration){
+			if(getDiffDate(year,month,day) > expiration) return `<p>Термін придатності <span>закінчився</span>.</p>`
+			else return  `<p>Продукт <span>придатний</span> до вживання.</p>`
+		}
+		let result = checkExpirationDate(expirationDate)
+		document.write(result)
+	</script>
+</body>
+</html>

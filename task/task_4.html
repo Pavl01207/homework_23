@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Task 4</title>
+</head>
+<body>
+	<script>
+		//Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.
+		function getrandomNumber(min,max){
+			return min+Math.floor(Math.random()*(max-min+1))
+		}
+		let firstNum = getrandomNumber(1,10)
+		let secondNum = getrandomNumber(1,10)
+		let startExercise = new Date()
+		let userAnswer= parseInt(prompt(`${firstNum} + ${secondNum} = ?`))
+		let endExercise = new Date()
+		let userTime = (endExercise - startExercise)/1000
+		document.write((userAnswer == (firstNum + secondNum))?`<p>Відповідь <span>вірна</span>. Час виконання: <span>${userTime}</span> секунд.</p>`:`<p>Відповідь <span>невірна</span>. Час виконання: <span>${userTime}</span> секунд.</p>`)
+		//
+	</script>
+</body>
+</html>
